@@ -334,5 +334,82 @@ Window {
                 }
             }
         }
+
+        Rectangle {
+            width: parent.width * 0.75
+            height: parent.height * 0.65
+            color: "transparent"
+            border.color: "blue"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+
+            Rectangle {
+                id: batteryIndicator
+                width: 150
+                height: 150
+                color: "transparent"
+
+                Rectangle {
+                    width: parent.width * 0.6
+                    height: parent.height * 0.35
+                    color: "transparent"
+                    anchors.centerIn: parent
+
+                    Text {
+                        id: batteryPercentageText
+                        text: "97%" // Use \n for line break
+                        font.pixelSize: 30
+                        color: "white"
+                        anchors.horizontalCenter: parent.horizontalCenter // Align the text horizontally
+                    }
+                    Text {
+                        id: batteryText
+                        text: "Battery charge" // Use \n for line break
+                        font.pixelSize: 10
+                        color: "white"
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.bottom: parent.bottom
+                    }
+                }
+
+                // Battery arc
+                Canvas {
+                    id: batteryCanvas // Give the Canvas an id
+                    anchors.fill: parent
+                    onPaint: {
+                        var ctx = batteryCanvas.getContext(
+                                    "2d") // Use the id to get the context
+                        ctx.clearRect(0, 0, batteryCanvas.width,
+                                      batteryCanvas.height)
+
+                        // Battery arc parameters
+                        var centerX = batteryCanvas.width / 2
+                        var centerY = batteryCanvas.height / 2
+                        var radius = Math.min(batteryCanvas.width,
+                                              batteryCanvas.height) / 2 - 10
+                        var startAngle = Math.PI / 30 // Starting angle at the top
+
+                        // Calculate end angle based on battery percentage
+                        var endAngle = startAngle + (batteryPercentageText.text.replace(
+                                                         "%",
+                                                         "") * 2 * Math.PI) / 100
+
+                        // Create a gradient
+                        var gradient = ctx.createLinearGradient(
+                                    0, 0, batteryCanvas.width,
+                                    batteryCanvas.height)
+                        gradient.addColorStop(0, "#01E4E0") // Start color
+                        gradient.addColorStop(1, "#01E4E0") // End color
+
+                        // Draw the battery arc
+                        ctx.beginPath()
+                        ctx.arc(centerX, centerY, radius, startAngle, endAngle)
+                        ctx.lineWidth = 7
+                        ctx.strokeStyle = gradient // Apply gradient
+                        ctx.stroke()
+                    }
+                }
+            }
+        }
     }
 }
