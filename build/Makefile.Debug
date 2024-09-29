@@ -100,10 +100,22 @@ compiler_rcc_clean:
 debug/qrc_qml.cpp: ../qml.qrc \
 		C:/Qt/6.6.2/mingw_64/bin/rcc.exe \
 		../main.qml \
+		../Image/Park_white.png \
+		../Image/Brake.png \
 		../Image/Low\ beam\ headlights.png \
+		../Image/ABS.png \
+		../Image/Brake_white.png \
+		../Image/Low\ beam\ headlights_white.png \
 		../Image/Lights.png \
+		../Image/belt.png \
 		../Image/Rare\ fog\ lights.png \
-		../Image/Parking\ lights.png
+		../Image/belt_green.png \
+		../Image/ABS_white.png \
+		../Image/Rare\ fog\ lights_white.png \
+		../Image/Parking\ lights_white.png \
+		../Image/Lights_white.png \
+		../Image/Parking\ lights.png \
+		../Image/Park.png
 	C:\Qt\6.6.2\mingw_64\bin\rcc.exe -name qml --no-zstd ..\qml.qrc -o debug\qrc_qml.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h

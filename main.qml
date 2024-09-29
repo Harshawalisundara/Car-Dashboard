@@ -9,6 +9,15 @@ Window {
     title: qsTr("Hello World")
     color: "black"
 
+    property bool isWhiteImageHeadlight: true
+    property bool isWhiteImageAuto: true
+    property bool isWhiteImageFog: true
+    property bool isWhiteImageParking: true
+    property bool isWhiteImageAbs: true
+    property bool isWhiteImagePark: true
+    property bool isWhiteImageHeadbrake: true
+    property bool isWhiteImageBelt: true
+
     Rectangle {
         width: parent.width * 0.9
         height: parent.height * 0.6
@@ -29,12 +38,12 @@ Window {
             DropShadow {
                 anchors.fill: parent
                 source: trapezoidContainer
-                color: "#01EBD4" // Shadow color
-                radius: 20 // Softness of the shadow
-                samples: 50 // Quality of the shadow blur
-                spread: 0.05 // Spread of the shadow
+                color: "#01EBD4"
+                radius: 20
+                samples: 50
+                spread: 0.05
                 horizontalOffset: 0
-                verticalOffset: 1 // Shadow offset below the canvas
+                verticalOffset: 1
             }
 
             Rectangle {
@@ -105,36 +114,22 @@ Window {
                         var ctx = getContext("2d")
                         var radius = 20
 
-                        // Create a linear gradient from top to bottom
                         var gradient = ctx.createLinearGradient(0, 0, 0, height)
-                        gradient.addColorStop(
-                                    0, "#01EBD4") // Starting color at the top
-                        gradient.addColorStop(
-                                    0.7,
-                                    "#212121") // Ending color at the bottom
+                        gradient.addColorStop(0, "#01EBD4")
+                        gradient.addColorStop(0.7, "#212121")
 
                         ctx.fillStyle = gradient
                         ctx.beginPath()
 
-                        // Define the inverted trapezoid shape with rounded bottom corners
-                        ctx.moveTo(0, 0) // Top left
-                        ctx.lineTo(width, 0) // Top right, wider at the top
+                        ctx.moveTo(0, 0)
+                        ctx.lineTo(width, 0)
+                        ctx.lineTo(width * 0.9, height - radius)
+                        ctx.quadraticCurveTo(width * 0.9, height,
+                                             width * 0.9 - radius, height)
+                        ctx.lineTo(width * 0.1 + radius, height)
+                        ctx.quadraticCurveTo(width * 0.1, height, width * 0.1,
+                                             height - radius)
 
-                        // Top-right to bottom-right (with bottom-right rounded corner)
-                        ctx.lineTo(width * 0.9,
-                                   height - radius) // Line to the point before the corner
-                        ctx.quadraticCurveTo(
-                                    width * 0.9, height, width * 0.9 - radius,
-                                    height) // Rounded bottom-right corner
-
-                        // Bottom-right to bottom-left (with bottom-left rounded corner)
-                        ctx.lineTo(width * 0.1 + radius,
-                                   height) // Line to the point before the bottom-left corner
-                        ctx.quadraticCurveTo(
-                                    width * 0.1, height, width * 0.1,
-                                    height - radius) // Rounded bottom-left corner
-
-                        // Bottom-left back to top-left
                         ctx.lineTo(0, 0)
 
                         ctx.closePath()
@@ -145,11 +140,12 @@ Window {
         }
 
         Column {
+            id: left_light_btn
             width: parent.width * 0.05
             height: parent.height * 0.4
             anchors.left: parent.left
             anchors.top: parent.top
-            anchors.topMargin: 30
+            anchors.topMargin: 35
             anchors.leftMargin: 30
 
             Rectangle {
@@ -161,12 +157,20 @@ Window {
 
                 Image {
                     id: parking
-                    source: "qrc:/Image/Parking lights.png"
+                    source: isWhiteImageParking ? "qrc:/Image/Parking lights_white.png" : "qrc:/Image/Parking lights.png"
                     height: parent.height * 0.7
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImageParking = !isWhiteImageParking
+                    }
+                }
             }
+
             Rectangle {
                 width: parent.width
                 height: parent.height / 4
@@ -176,26 +180,41 @@ Window {
 
                 Image {
                     id: auto
-                    source: "qrc:/Image/Lights.png"
+                    source: isWhiteImageAuto ? "qrc:/Image/Lights_white.png" : "qrc:/Image/Lights.png"
                     height: parent.height * 0.8
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImageAuto = !isWhiteImageAuto
+                    }
+                }
             }
+
             Rectangle {
                 width: parent.width
                 height: parent.height / 4
                 color: "transparent"
-                // anchors.left: parent.left
-                // anchors.leftMargin: 5
+
                 Image {
                     id: low_beam_headlight
-                    source: "qrc:/Image/Low beam headlights.png"
+                    source: isWhiteImageHeadlight ? "qrc:/Image/Low beam headlights_white.png" : "qrc:/Image/Low beam headlights.png"
                     height: parent.height * 0.7
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImageHeadlight = !isWhiteImageHeadlight
+                    }
+                }
             }
+
             Rectangle {
                 width: parent.width
                 height: parent.height / 4
@@ -203,10 +222,115 @@ Window {
 
                 Image {
                     id: foglight
-                    source: "qrc:/Image/Rare fog lights.png"
+                    source: isWhiteImageFog ? "qrc:/Image/Rare fog lights_white.png" : "qrc:/Image/Rare fog lights.png"
                     height: parent.height * 0.7
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImageFog = !isWhiteImageFog
+                    }
+                }
+            }
+        }
+
+        Column {
+            id: right_light_btn
+            width: parent.width * 0.05
+            height: parent.height * 0.4
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.topMargin: 35
+            anchors.rightMargin: 30
+
+            Rectangle {
+                width: parent.width
+                height: parent.height / 4
+                color: "transparent"
+                anchors.left: parent.left
+                anchors.leftMargin: -27
+
+                Image {
+                    id: abs
+                    source: isWhiteImageAbs ? "qrc:/Image/ABS_white.png" : "qrc:/Image/ABS.png"
+                    height: parent.height * 0.7
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImageAbs = !isWhiteImageAbs
+                    }
+                }
+            }
+
+            Rectangle {
+                width: parent.width
+                height: parent.height / 4
+                color: "transparent"
+                anchors.left: parent.left
+                anchors.leftMargin: -7
+
+                Image {
+                    id: park
+                    source: isWhiteImagePark ? "qrc:/Image/Park_white.png" : "qrc:/Image/Park.png"
+                    height: parent.height * 0.7
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImagePark = !isWhiteImagePark
+                    }
+                }
+            }
+
+            Rectangle {
+                width: parent.width
+                height: parent.height / 4
+                color: "transparent"
+
+                Image {
+                    id: brake
+                    source: isWhiteImageHeadbrake ? "qrc:/Image/Brake_white.png" : "qrc:/Image/Brake.png"
+                    height: parent.height * 0.7
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImageHeadbrake = !isWhiteImageHeadbrake
+                    }
+                }
+            }
+
+            Rectangle {
+                width: parent.width
+                height: parent.height / 4
+                color: "transparent"
+
+                Image {
+                    id: sheetbelt
+                    source: isWhiteImageBelt ? "qrc:/Image/belt.png" : "qrc:/Image/belt_green.png"
+                    height: parent.height * 0.6
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        isWhiteImageBelt = !isWhiteImageBelt
+                    }
                 }
             }
         }

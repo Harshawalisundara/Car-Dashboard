@@ -2,8 +2,20 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Image/Low beam headlights.png</file>
-        <file>Image/Rare fog lights.png</file>
         <file>Image/Lights.png</file>
         <file>Image/Parking lights.png</file>
+        <file>Image/Low beam headlights_white.png</file>
+        <file>Image/Lights_white.png</file>
+        <file>Image/Rare fog lights_white.png</file>
+        <file>Image/Rare fog lights.png</file>
+        <file>Image/Parking lights_white.png</file>
+        <file>Image/ABS_white.png</file>
+        <file>Image/ABS.png</file>
+        <file>Image/Park.png</file>
+        <file>Image/Park_white.png</file>
+        <file>Image/Brake.png</file>
+        <file>Image/Brake_white.png</file>
+        <file>Image/belt.png</file>
+        <file>Image/belt_green.png</file>
     </qresource>
 </RCC>
