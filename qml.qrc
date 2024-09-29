@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Image/Low beam headlights.png</file>
+    </qresource>
+</RCC>
