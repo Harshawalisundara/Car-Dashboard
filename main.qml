@@ -413,7 +413,7 @@ Window {
 
             Rectangle {
                 width: parent.width * 0.2
-                height: 80
+                height: parent.height * 0.3
                 color: "transparent"
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -424,7 +424,7 @@ Window {
                     styleColor: "#1cc497"
                     style: Text.Sunken
                     color: "#01E6DE"
-                    font.pixelSize: 55
+                    font.pixelSize: parent.height * 0.75
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 Text {
@@ -434,10 +434,205 @@ Window {
                     styleColor: "#1cc497"
                     style: Text.Sunken
                     color: "#01E6DE"
-                    font.pixelSize: 20
+                    font.pixelSize: parent.height * 0.25
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
                 }
+            }
+
+            Rectangle {
+                width: parent.width * 0.25
+                height: parent.height * 0.7
+                color: "transparent"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+
+                Rectangle{
+                    width: parent.height * 0.3
+                    height: parent.height * 0.3
+                    color: "white"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 20
+                    radius: 300
+                    border.color: "red"
+                    border.width: 3
+
+                    Text {
+                        text: qsTr("70")
+                        font.bold: true
+                        color: "black"
+                        font.pixelSize: parent.height * 0.38
+                        anchors.centerIn: parent
+                    }
+                }
+
+                Image {
+                    source: "qrc:/Image/Road.png"
+                    height: parent.height
+                    fillMode: Image.PreserveAspectFit
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                }
+
+            }
+
+            Rectangle{
+                width: parent.width * 0.3
+                height: parent.height * 0.6
+                color: "transparent"
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.topMargin: 15
+
+                Column{
+                    anchors.fill: parent
+                    spacing: 3
+
+                    Rectangle{
+                        width: parent.width
+                        height: parent.height /3
+                        color: "transparent"
+
+                        Row{
+                            anchors.fill: parent
+                            spacing: 10
+
+                            Rectangle{
+                                width: parent.width * 0.28
+                                height: parent.height
+                                color: "transparent"
+
+                                Image {
+                                    source: "qrc:/Image/distance.png"
+                                    height: parent.height * 0.4
+                                    fillMode: Image.PreserveAspectFit
+                                    anchors.centerIn: parent
+                                }
+                            }
+
+                            Rectangle{
+                                width: parent.width * 0.65
+                                height: parent.height * 0.9
+                                color: "transparent"
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                Text {
+                                    text: qsTr("188 km")
+                                    font.family: "Segoe UI Semibold"
+                                    font.pixelSize: parent.height * 0.48
+                                    color: "white"
+                                }
+
+                                Text {
+                                    text: qsTr("Distance")
+                                    font.pixelSize: parent.height * 0.32
+                                    color: "white"
+                                    opacity: 0.4
+                                    anchors.bottom: parent.bottom
+                                }
+                            }
+                        }
+                    }
+
+                    Rectangle{
+                        width: parent.width
+                        height: parent.height /3
+                        color: "transparent"
+
+                        Row{
+                            anchors.fill: parent
+                            spacing: 10
+
+                            Rectangle{
+                                width: parent.width * 0.28
+                                height: parent.height
+                                color: "transparent"
+
+                                Image {
+                                    source: "qrc:/Image/fuel.png"
+                                    height: parent.height * 0.5
+                                    fillMode: Image.PreserveAspectFit
+                                    anchors.centerIn: parent
+                                }
+                            }
+
+                            Rectangle{
+                                width: parent.width * 0.65
+                                height: parent.height * 0.9
+                                color: "transparent"
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                Text {
+                                    text: qsTr("34 mpg")
+                                    font.family: "Segoe UI Semibold"
+                                    font.pixelSize: parent.height * 0.48
+                                    color: "white"
+                                }
+
+                                Text {
+                                    text: qsTr("Avg. Fuel Usage")
+                                    font.pixelSize: parent.height * 0.32
+                                    color: "white"
+                                    opacity: 0.4
+                                    anchors.bottom: parent.bottom
+                                }
+                            }
+                        }
+                    }
+                    Rectangle{
+                        width: parent.width
+                        height: parent.height /3
+                        color: "transparent"
+
+                        Row{
+                            anchors.fill: parent
+                            spacing: 10
+
+                            Rectangle{
+                                width: parent.width * 0.28
+                                height: parent.height
+                                color: "transparent"
+
+                                Image {
+                                    source: "qrc:/Image/speedometer.png"
+                                    height: parent.height * 0.5
+                                    fillMode: Image.PreserveAspectFit
+                                    anchors.centerIn: parent
+                                }
+                            }
+
+                            Rectangle{
+                                width: parent.width * 0.65
+                                height: parent.height * 0.9
+                                color: "transparent"
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                Text {
+                                    text: qsTr("78 mph")
+                                    font.family: "Segoe UI Semibold"
+                                    font.pixelSize: parent.height * 0.48
+                                    color: "white"
+                                }
+
+                                Text {
+                                    text: qsTr("Avg. Speed")
+                                    font.pixelSize: parent.height * 0.32
+                                    color: "white"
+                                    opacity: 0.4
+                                    anchors.bottom: parent.bottom
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            Rectangle{
+                width: parent.width * 0.3
+                height: parent.height * 0.1
+                color: "red"
+                anchors.bottom: parent.bottom
             }
         }
     }

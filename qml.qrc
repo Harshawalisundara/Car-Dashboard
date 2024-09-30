@@ -17,5 +17,9 @@
         <file>Image/Brake_white.png</file>
         <file>Image/belt.png</file>
         <file>Image/belt_green.png</file>
+        <file>Image/distance.png</file>
+        <file>Image/fuel.png</file>
+        <file>Image/speedometer.png</file>
+        <file>Image/Road.png</file>
     </qresource>
 </RCC>
