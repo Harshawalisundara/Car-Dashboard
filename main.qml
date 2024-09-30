@@ -357,7 +357,7 @@ Window {
 
                     Text {
                         id: batteryPercentageText
-                        text: "97%" // Use \n for line break
+                        text: "87%" // Use \n for line break
                         font.pixelSize: 30
                         color: "white"
                         anchors.horizontalCenter: parent.horizontalCenter // Align the text horizontally
@@ -408,6 +408,35 @@ Window {
                         ctx.strokeStyle = gradient // Apply gradient
                         ctx.stroke()
                     }
+                }
+            }
+
+            Rectangle {
+                width: parent.width * 0.2
+                height: 80
+                color: "transparent"
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                Text {
+                    id: speed
+                    text: qsTr("68")
+                    font.family: "Tw Cen MT Condensed Extra Bold"
+                    styleColor: "#1cc497"
+                    style: Text.Sunken
+                    color: "#01E6DE"
+                    font.pixelSize: 55
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+                Text {
+                    id: speed_txt
+                    text: qsTr("MPH")
+                    font.family: "Segoe UI"
+                    styleColor: "#1cc497"
+                    style: Text.Sunken
+                    color: "#01E6DE"
+                    font.pixelSize: 20
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
                 }
             }
         }
