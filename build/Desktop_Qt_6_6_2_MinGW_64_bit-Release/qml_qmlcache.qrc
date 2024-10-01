@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="main.qml">../../main.qml</file>
+        <file alias="Image/Low beam headlights.png">../../Image/Low beam headlights.png</file>
+        <file alias="Image/Lights.png">../../Image/Lights.png</file>
+        <file alias="Image/Parking lights.png">../../Image/Parking lights.png</file>
+        <file alias="Image/Low beam headlights_white.png">../../Image/Low beam headlights_white.png</file>
+        <file alias="Image/Lights_white.png">../../Image/Lights_white.png</file>
+        <file alias="Image/Rare fog lights_white.png">../../Image/Rare fog lights_white.png</file>
+        <file alias="Image/Rare fog lights.png">../../Image/Rare fog lights.png</file>
+        <file alias="Image/Parking lights_white.png">../../Image/Parking lights_white.png</file>
+        <file alias="Image/ABS_white.png">../../Image/ABS_white.png</file>
+        <file alias="Image/ABS.png">../../Image/ABS.png</file>
+        <file alias="Image/Park.png">../../Image/Park.png</file>
+        <file alias="Image/Park_white.png">../../Image/Park_white.png</file>
+        <file alias="Image/Brake.png">../../Image/Brake.png</file>
+        <file alias="Image/Brake_white.png">../../Image/Brake_white.png</file>
+        <file alias="Image/belt.png">../../Image/belt.png</file>
+        <file alias="Image/belt_green.png">../../Image/belt_green.png</file>
+        <file alias="Image/distance.png">../../Image/distance.png</file>
+        <file alias="Image/fuel.png">../../Image/fuel.png</file>
+        <file alias="Image/speedometer.png">../../Image/speedometer.png</file>
+        <file alias="Image/Road.png">../../Image/Road.png</file>
+    </qresource>
+</RCC>

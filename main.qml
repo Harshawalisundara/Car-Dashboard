@@ -1,6 +1,12 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import Qt5Compat.GraphicalEffects
+import QtQuick.Controls 2.15
+// import QtQuick.Layouts 1.15
+// import Qt.labs.platform 1.0
+import QtQuick.Controls.Material 6.0
+import QtQuick.Controls.Material.impl
+import QtQuick.Templates as T
 
 Window {
     width: 720
@@ -339,14 +345,14 @@ Window {
             width: parent.width * 0.75
             height: parent.height * 0.65
             color: "transparent"
-            border.color: "blue"
+            // border.color: "blue"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
 
             Rectangle {
                 id: batteryIndicator
-                width: 150
-                height: 150
+                width: parent.width * 0.3
+                height: parent.height * 0.65
                 color: "transparent"
 
                 Rectangle {
@@ -358,14 +364,15 @@ Window {
                     Text {
                         id: batteryPercentageText
                         text: "87%" // Use \n for line break
-                        font.pixelSize: 30
+                        font.pixelSize: parent.height * 0.5
                         color: "white"
                         anchors.horizontalCenter: parent.horizontalCenter // Align the text horizontally
                     }
+
                     Text {
                         id: batteryText
                         text: "Battery charge" // Use \n for line break
-                        font.pixelSize: 10
+                        font.pixelSize: parent.height * 0.25
                         color: "white"
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.bottom: parent.bottom
@@ -427,6 +434,7 @@ Window {
                     font.pixelSize: parent.height * 0.75
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
+
                 Text {
                     id: speed_txt
                     text: qsTr("MPH")
@@ -447,7 +455,7 @@ Window {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
 
-                Rectangle{
+                Rectangle {
                     width: parent.height * 0.3
                     height: parent.height * 0.3
                     color: "white"
@@ -474,10 +482,9 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
                 }
-
             }
 
-            Rectangle{
+            Rectangle {
                 width: parent.width * 0.3
                 height: parent.height * 0.6
                 color: "transparent"
@@ -485,20 +492,20 @@ Window {
                 anchors.top: parent.top
                 anchors.topMargin: 15
 
-                Column{
+                Column {
                     anchors.fill: parent
                     spacing: 3
 
-                    Rectangle{
+                    Rectangle {
                         width: parent.width
-                        height: parent.height /3
+                        height: parent.height / 3
                         color: "transparent"
 
-                        Row{
+                        Row {
                             anchors.fill: parent
                             spacing: 10
 
-                            Rectangle{
+                            Rectangle {
                                 width: parent.width * 0.28
                                 height: parent.height
                                 color: "transparent"
@@ -511,7 +518,7 @@ Window {
                                 }
                             }
 
-                            Rectangle{
+                            Rectangle {
                                 width: parent.width * 0.65
                                 height: parent.height * 0.9
                                 color: "transparent"
@@ -535,16 +542,16 @@ Window {
                         }
                     }
 
-                    Rectangle{
+                    Rectangle {
                         width: parent.width
-                        height: parent.height /3
+                        height: parent.height / 3
                         color: "transparent"
 
-                        Row{
+                        Row {
                             anchors.fill: parent
                             spacing: 10
 
-                            Rectangle{
+                            Rectangle {
                                 width: parent.width * 0.28
                                 height: parent.height
                                 color: "transparent"
@@ -557,7 +564,7 @@ Window {
                                 }
                             }
 
-                            Rectangle{
+                            Rectangle {
                                 width: parent.width * 0.65
                                 height: parent.height * 0.9
                                 color: "transparent"
@@ -580,16 +587,16 @@ Window {
                             }
                         }
                     }
-                    Rectangle{
+                    Rectangle {
                         width: parent.width
-                        height: parent.height /3
+                        height: parent.height / 3
                         color: "transparent"
 
-                        Row{
+                        Row {
                             anchors.fill: parent
                             spacing: 10
 
-                            Rectangle{
+                            Rectangle {
                                 width: parent.width * 0.28
                                 height: parent.height
                                 color: "transparent"
@@ -602,7 +609,7 @@ Window {
                                 }
                             }
 
-                            Rectangle{
+                            Rectangle {
                                 width: parent.width * 0.65
                                 height: parent.height * 0.9
                                 color: "transparent"
@@ -628,11 +635,114 @@ Window {
                 }
             }
 
-            Rectangle{
-                width: parent.width * 0.3
+            Rectangle {
+                width: parent.width * 0.35
                 height: parent.height * 0.1
-                color: "red"
+                color: "transparent"
                 anchors.bottom: parent.bottom
+                anchors.bottomMargin: 20
+                anchors.left: parent.left
+                anchors.leftMargin: -20
+
+                Rectangle {
+                    width: parent.width * 0.45
+                    height: parent.height
+                    anchors.centerIn: parent
+                    color: "transparent"
+
+                    ProgressBar {
+                        id: progressBar
+                        value: Math.min((speed_meter.text.replace("mph",
+                                                                  "") / 100),
+                                        1.0)
+                        anchors.verticalCenter: parent.verticalCenter
+                        height: parent.height * 0.5
+                        width: parent.width
+                        contentItem: ProgressBarImpl {
+                            implicitHeight: parent.height * 0.5
+
+                            scale: progressBar.mirrored ? -1 : 1
+                            color: "#32D74B"
+                            progress: progressBar.position
+                            indeterminate: progressBar.visible
+                                           && progressBar.indeterminate
+                        }
+
+                        background: Rectangle {
+                            implicitWidth: 200
+                            implicitHeight: parent.height * 0.5
+                            anchors.verticalCenter: parent.verticalCenter
+                            height: parent.height * 0.5
+                            color: "#01E6DC"
+                            opacity: 0.3
+                        }
+                    }
+                }
+
+                Text {
+                    id: temperatureText
+                    text: "100.6"
+                    color: "white"
+                    font.pixelSize: parent.height * 0.5
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Text {
+                    text: "°F"
+                    color: "white"
+                    font.pixelSize: parent.height * 0.5
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: temperatureText.right
+                    anchors.leftMargin: 5
+                    opacity: 0.3
+                }
+
+                Text {
+                    id: speed_meter
+                    text: "78mph"
+                    color: "white"
+                    font.pixelSize: parent.height * 0.5
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                }
+            }
+
+            Rectangle {
+                width: parent.width * 0.35
+                height: parent.height * 0.1
+                color: "transparent"
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 20
+                anchors.right: parent.right
+                anchors.rightMargin: -20
+
+                Text {
+                    id: ready
+                    text: qsTr("R E A D Y")
+                    color: "#32D74B"
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: parent.height * 0.5
+                }
+
+                Text {
+                    id: parking_sign
+                    text: qsTr("P")
+                    font.pixelSize: parent.height * 0.5
+                    color: "#FFFFFF"
+                    anchors.left: ready.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: 20
+                }
+
+                Text {
+                    text: qsTr("R  N  D")
+                    font.pixelSize: parent.height * 0.5
+                    color: "#FFFFFF"
+                    opacity: 0.3
+                    anchors.left: parking_sign.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: 8
+                }
             }
         }
     }
